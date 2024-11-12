@@ -37,7 +37,6 @@ class AdminDashboard extends Controller
 
         return view('admin.dashboard')->with(['totalGuest'=>$totalGuests,'pendingPaymentsCount'=>$pendingPaymentsCount,'archiveGuest'=>$archivedGuestsCount, 'cashFlow' => $totalFund]);
     }
-    // Guest
     public function addGuestView(){
         return view('admin.addguest');
     }
@@ -292,6 +291,8 @@ class AdminDashboard extends Controller
             $guestPayment->paid_amount = $PaidAmount;
             $pendingAmount = $totalAmount - $PaidAmount;
             $guestPayment->pending_amount = $pendingAmount;
+            $guestPayment->start_date = $request->start_date;
+            $guestPayment->end_date = $request->end_date;
             if($pendingAmount > 0){
                 $guestPayment->payment_status = 'pending';
             }else{
@@ -334,7 +335,6 @@ class AdminDashboard extends Controller
             return redirect()->back();
         }
     }
-
     public function cashRegisterOutFlow(Request $request){
         $cashRegister = new cashRegister;
         if($request->type == "guest"){

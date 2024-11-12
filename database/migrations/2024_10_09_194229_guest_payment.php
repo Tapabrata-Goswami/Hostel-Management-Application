@@ -21,6 +21,8 @@ return new class extends Migration
             $table->enum('payment_status', ['pending', 'completed', 'failed'])->default('pending');
             $table->boolean('daily')->default(false);
             $table->boolean('monthly')->default(false);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('total_amount')->nullable();
             $table->string('paid_amount')->nullable();
             $table->string('pending_amount')->nullable();

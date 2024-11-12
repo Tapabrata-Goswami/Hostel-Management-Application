@@ -49,6 +49,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input type="date" name="start_date" class="form-control" value="{{$guestPayment->start_date}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="date" name="end_date" value="{{$guestPayment->end_date}}" class="form-control">
+                            </div>
+                        </div>
+                            
+                        
+                    </div>
                     <div class="form-group">
                         <label class="h6" for="">Amount paid*</label>
                         <input class="form-control" type="number" name="amount_paid" value="{{$guestPayment->paid_amount}}">
