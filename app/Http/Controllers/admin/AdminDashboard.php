@@ -307,6 +307,7 @@ class AdminDashboard extends Controller
             $cashRegister->code = $guest->code;
             $cashRegister->guest_id = $request->guestId;
             $cashRegister->payment_by = Session::get('f_name');
+            // $cashRegister->payment_by = $request->money_by;
             $cashRegister->user_id = Session::get('user_id');
             $cashRegister->payments = $PaidAmount;
             $cashRegister->cash_flow = 1;
@@ -342,7 +343,7 @@ class AdminDashboard extends Controller
 
             $cashRegister->code = $guest->code;
             $cashRegister->guest_id = $guest->id;
-            $cashRegister->payment_by = Session::get('f_name');
+            $cashRegister->payment_by = $request->money_by;
             $cashRegister->user_id = Session::get('user_id');
             $cashRegister->payments = $request->guestAmount;
             $cashRegister->cash_flow = 0;
@@ -352,10 +353,33 @@ class AdminDashboard extends Controller
 
             $cashRegister->code = 'N/A';
             $cashRegister->guest_id = 'N/A';
-            $cashRegister->payment_by = Session::get('f_name');
+            $cashRegister->payment_by = $request->money_by;
             $cashRegister->user_id = Session::get('user_id');
             $cashRegister->payments = $request->otherAmount;
             $cashRegister->cash_flow = 0;
+            $cashRegister->cash_comments = $request->otherComments;
+            $cashRegister->save();
+        }
+
+        if($request->type == "guest-in"){
+            $guest = Guest::where('code', $request->guestCode)->first();
+
+            $cashRegister->code = $guest->code;
+            $cashRegister->guest_id = $guest->id;
+            $cashRegister->payment_by = $request->money_by;
+            $cashRegister->user_id = Session::get('user_id');
+            $cashRegister->payments = $request->guestAmount;
+            $cashRegister->cash_flow = 1;
+            $cashRegister->save();
+
+        }else if($request->type == "other-in"){
+
+            $cashRegister->code = 'N/A';
+            $cashRegister->guest_id = 'N/A';
+            $cashRegister->payment_by = $request->money_by;
+            $cashRegister->user_id = Session::get('user_id');
+            $cashRegister->payments = $request->otherAmount;
+            $cashRegister->cash_flow = 1;
             $cashRegister->cash_comments = $request->otherComments;
             $cashRegister->save();
         }

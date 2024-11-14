@@ -78,7 +78,7 @@
                 });
             });
 
-            $("#close-button-for-comment,#close-button-cash-out-modal").on("click", function(){
+            $("#close-button-for-comment,#close-button-cash-out-modal, #close-button-cash-in-modal").on("click", function(){
                 location.reload();
             });
 
@@ -155,7 +155,7 @@
             // Cashout Functionality------------
             $("#cash-out-btn").on("click", function(){
                 var selectedOption = $("input[name='cash_out_reason']:checked").val();
-                
+                let money_by_out = $("#money_by_out").val();
                 if (selectedOption === "gust") {
                     let type = "guest";
                     let guestCode = $("#guest-code").val();
@@ -164,6 +164,7 @@
                         url:"{{route('cashRegisterOutFlow')}}",
                         data:{
                             type:type,
+                            money_by: money_by_out,
                             guestCode:guestCode,
                             guestAmount:guestAmount,
                         },
@@ -179,6 +180,48 @@
                         url:"{{route('cashRegisterOutFlow')}}",
                         data:{
                             type:type,
+                            money_by: money_by_out,
+                            otherComments:otherComments,
+                            otherAmount : otherAmount,
+                        },
+                        success:function(data){
+                            location.reload();
+                        }
+                    });
+                }
+            });
+
+
+            // Cashin Functionality------------
+            $("#cash-in-btn").on("click", function(){
+                var selectedOption = $("input[name='cash_in_reason']:checked").val();
+                let money_by_in = $("#money_by_in").val();
+                if (selectedOption === "gust") {
+                    let type = "guest-in";
+                    
+                    let guestCode = $("#guest-in-code").val();
+                    let guestAmount = $("#guest-in-amount").val();
+                    $.ajax({
+                        url:"{{route('cashRegisterOutFlow')}}",
+                        data:{
+                            type:type,
+                            money_by: money_by_in,
+                            guestCode:guestCode,
+                            guestAmount:guestAmount,
+                        },
+                        success:function(data){
+                            location.reload();
+                        }
+                    });
+                } else if (selectedOption === "other") {
+                    let type = "other-in";
+                    let otherComments = $("#other-cash-in-comments").val();
+                    let otherAmount = $("#other-in-amount").val();
+                    $.ajax({
+                        url:"{{route('cashRegisterOutFlow')}}",
+                        data:{
+                            type:type,
+                            money_by: money_by_in,
                             otherComments:otherComments,
                             otherAmount : otherAmount,
                         },
