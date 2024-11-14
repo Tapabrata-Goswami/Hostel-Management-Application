@@ -186,10 +186,10 @@
                     document.getElementById('guest-choose').style.display = (option === 'gust') ? 'flex' : 'none';
                     document.getElementById('other-choose').style.display = (option === 'other') ? 'block' : 'none';
                 }
-                window.onload = function() {
+                document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('gust').checked = true;
                     showSection('gust');
-                }
+                });
             </script>
 
             <div class="modal-footer" style="display:block;">
@@ -247,7 +247,7 @@
                     </div>
                 </div>
 
-                <div id="other-choose-in">
+                <div id="other-choose-in" style="display:none;">
                     
                     <div class="form-group">
                         <label for="">Comments for cash in*</label>
@@ -265,10 +265,10 @@
                     document.getElementById('guest-choose-in').style.display = (option === 'gust') ? 'flex' : 'none';
                     document.getElementById('other-choose-in').style.display = (option === 'other') ? 'block' : 'none';
                 }
-                window.onload = function() {
+                document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('gust-in').checked = true;
-                    showSectionin('gust');
-                }
+                    showSection('gust');
+                });
             </script>
 
             <div class="modal-footer" style="display:block;">
