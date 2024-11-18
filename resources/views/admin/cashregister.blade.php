@@ -93,7 +93,7 @@
                             @endforeach
                         @endif
                         <td>
-                            ${{$ca->payments}} 
+                            {{$ca->payments}} 
                             @if($ca->cash_flow == 1)
                                 <span class="btn btn-success" style="padding: 0px 10px;margin-left: 10px;">In</span>
                             @elseif($ca->cash_flow == 0)
