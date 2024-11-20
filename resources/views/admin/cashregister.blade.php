@@ -56,11 +56,14 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Guest Name</th>
                         <th>Guest Code</th>
                         <th>Room/Bed no.</th>
                         <th>Amount</th>
+                        <th>Payment Type</th>
                         <th>Name of Transaction</th>
                         <th>Payment Date</th>
+                        <th>Comments</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -82,6 +85,17 @@
                     @foreach($cashRegister as $ca)
                     <tr>
                         <td>{{$count}}</td>
+                        
+                        @if($ca->guest_id == 'N/A')
+                            <td>{{$ca->guest_id}}</td>
+                        @else
+                            @foreach($guests as $gs)
+                                @if($ca->guest_id == $gs->id)
+                                    <td>{{$gs->first_name}} {{$gs->last_name}}</td>
+                                @endif
+                            @endforeach
+                        @endif    
+                        
                         <td>{{$ca->code}}</td>
                         @if($ca->guest_id == 'N/A')
                             <td>{{$ca->guest_id}}</td>
@@ -94,6 +108,9 @@
                         @endif
                         <td>
                             {{$ca->payments}} 
+                            
+                        </td>
+                        <td>
                             @if($ca->cash_flow == 1)
                                 <span class="btn btn-success" style="padding: 0px 10px;margin-left: 10px;">In</span>
                             @elseif($ca->cash_flow == 0)
@@ -107,6 +124,7 @@
                             @endif
                         @endforeach -->
                         <td>{{ $ca->created_at->format('F j, Y') }}</td>
+                        <td>{{ $ca->cash_comments}}</td>
                         <td>
                             <a href="{{route('deleteCashRegister',$ca->id)}}" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete register">
                                 <span class="text"><i class="fa-solid fa-trash"></i></span>
@@ -138,11 +156,11 @@
                 </button>
             </div>
             <div class="modal-body p-3">
-                <label>Choose Cash out reason</label><br>
+                <!-- <label>Choose Cash out reason</label><br>
                 <input type="radio" name="cash_out_reason" id="gust" value="gust" onclick="showSection('gust')">
                 <label for="gust">Gust</label>
                 <input type="radio" name="cash_out_reason" id="other" value="other" onclick="showSection('other')">
-                <label for="other">Other</label>
+                <label for="other">Other</label> -->
                 <div class="form-group">
                     <label>Select cash out by*</label>
                     <select name="money_by" id="money_by_out" class="form-control">
@@ -153,7 +171,7 @@
                     </select>
                 </div>
 
-                <div class="row" id="guest-choose">
+                <!-- <div class="row" id="guest-choose">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Guest Code*</label>
@@ -166,7 +184,7 @@
                             <input type="text" id="guest-amount" class="form-control">
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div id="other-choose">
 
@@ -182,14 +200,14 @@
 
             </div>
             <script>
-                function showSection(option) {
-                    document.getElementById('guest-choose').style.display = (option === 'gust') ? 'flex' : 'none';
-                    document.getElementById('other-choose').style.display = (option === 'other') ? 'block' : 'none';
-                }
-                document.addEventListener('DOMContentLoaded', function() {
-                    document.getElementById('gust').checked = true;
-                    showSection('gust');
-                });
+                // function showSection(option) {
+                //     document.getElementById('guest-choose').style.display = (option === 'gust') ? 'flex' : 'none';
+                //     document.getElementById('other-choose').style.display = (option === 'other') ? 'block' : 'none';
+                // }
+                // document.addEventListener('DOMContentLoaded', function() {
+                //     document.getElementById('gust').checked = true;
+                //     showSection('gust');
+                // });
             </script>
 
             <div class="modal-footer" style="display:block;">

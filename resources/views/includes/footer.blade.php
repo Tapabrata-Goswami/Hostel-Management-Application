@@ -6,7 +6,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Your Website @php echo date('Y'); @endphp Made with <i class="fa-solid fa-heart" style="color: #e6517e"></i> by <a href="https://www.linkedin.com/in/tapabrata-goswami" target="_blank">byteCode</a></span>
                     </div>
                 </div>
             </footer>
@@ -154,25 +154,25 @@
 
             // Cashout Functionality------------
             $("#cash-out-btn").on("click", function(){
-                var selectedOption = $("input[name='cash_out_reason']:checked").val();
+                // var selectedOption = $("input[name='cash_out_reason']:checked").val();
                 let money_by_out = $("#money_by_out").val();
-                if (selectedOption === "gust") {
-                    let type = "guest";
-                    let guestCode = $("#guest-code").val();
-                    let guestAmount = $("#guest-amount").val();
-                    $.ajax({
-                        url:"{{route('cashRegisterOutFlow')}}",
-                        data:{
-                            type:type,
-                            money_by: money_by_out,
-                            guestCode:guestCode,
-                            guestAmount:guestAmount,
-                        },
-                        success:function(data){
-                            location.reload();
-                        }
-                    });
-                } else if (selectedOption === "other") {
+                // if (selectedOption === "gust") {
+                //     let type = "guest";
+                //     let guestCode = $("#guest-code").val();
+                //     let guestAmount = $("#guest-amount").val();
+                //     $.ajax({
+                //         url:"{{route('cashRegisterOutFlow')}}",
+                //         data:{
+                //             type:type,
+                //             money_by: money_by_out,
+                //             guestCode:guestCode,
+                //             guestAmount:guestAmount,
+                //         },
+                //         success:function(data){
+                //             location.reload();
+                //         }
+                //     });
+                // } else if (selectedOption === "other") {
                     let type = "other";
                     let otherComments = $("#other-cash-out-comments").val();
                     let otherAmount = $("#other-amount").val();
@@ -188,7 +188,7 @@
                             location.reload();
                         }
                     });
-                }
+                // }
             });
 
 
