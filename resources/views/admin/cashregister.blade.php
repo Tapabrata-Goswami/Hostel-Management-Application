@@ -36,7 +36,7 @@
                             $total = $totalIn - $totalOut;
                         @endphp
 
-                        ${{ $total }}
+                        {{ $total }}
                         </h5>
                     </div>
                 </div>
