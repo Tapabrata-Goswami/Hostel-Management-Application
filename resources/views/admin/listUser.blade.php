@@ -3,8 +3,15 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Manager list</h1>
+<!-- <h1 class="h3 mb-2 text-gray-800">Manager list</h1> -->
+<div class="row">
+    <div class="col-md-6">
 
+    </div>
+    <div class="col-md-6 d-flex justify-content-end mb-3">
+        <a class="btn btn-primary" href="{{route('addUserView')}}">Add Manager</a>
+    </div>
+</div>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -18,7 +25,6 @@
                         <th>User Name</th>
                         <th>Name</th>
                         <th>Contact info</th>
-                        <th>Status</th>
                         <th>User Type</th>
                         <th>Action</th>
                     </tr>
@@ -29,7 +35,6 @@
                         <th>User Name</th>
                         <th>Name</th>
                         <th>Contact info</th>
-                        <th>Status</th>
                         <th>User Type</th>
                         <th>Action</th>
                     </tr>
@@ -39,27 +44,17 @@
                         $count = 1
                     @endphp
                     @foreach ($users as $user)
-                    @if(session('user_id') != $user->id)
+                    @if(session('user_type') != $user->user_type)
                     <tr>
                         <td>{{$count}}</td>
-                        <td>{{$user->username}}</td>
+                        <td>{{$user->email}}</td>
                         <td>{{$user->fname}} {{$user->lname}}</td>
-                        <td>{{$user->email}}<br>{{$user->mobile_number}}</td>
-                        <td>Active</td>
+                        <td>{{$user->email}}</td>
                         <td>
-                            @if($user->user_type == 1)
-                                admin
-                            @elseif($user->user_type == 2)
-                                commentator
-                            @elseif($user->user_type == 3)
-                                viwer
-                            @endif
+                            Manager
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-sm">
-                                <span class="text"><i class="fa-solid fa-pen-to-square"></i></span>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-sm">
+                            <a href="{{route('deleteUser', $user->id)}}" class="btn btn-danger btn-sm">
                                 <span class="text"><i class="fa-solid fa-trash"></i></span>
                             </a>
                         </td>

@@ -38,6 +38,11 @@ Route::middleware([AdminLogin::class])->prefix('/auth')->group(function () {
     Route::get('/cash-register-delete/{crId}', [AdminDashboard::class,'deleteCashRegister'])->name('deleteCashRegister');
 
     Route::get('/list-user',[AdminDashboard::class, 'listUserView'])->name('userList');
+
+    Route::get('/add-user', [AdminDashboard::class, 'addUserView'])->name('addUserView');
+    Route::post('/add-user',[AdminDashboard::class, 'addUser'])->name('addUser');
+
+    Route::get('/deleter-user/{uId}', [AdminDashboard::class, 'deleteUser'])->name('deleteUser');
 });
 
 Route::get('/auth/logout', [LogoutController::class,'logout'])->name('logout');

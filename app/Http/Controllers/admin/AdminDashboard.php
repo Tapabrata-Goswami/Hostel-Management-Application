@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Guest;
 use App\Models\GuestPayment;
@@ -114,7 +115,7 @@ class AdminDashboard extends Controller
     }
     public function listGuestView(){
 
-        $guests = Guest::all();
+        $guests = Guest::orderBy('created_at', 'desc')->get(); 
         $guests_payment = GuestPayment::all();
         $guest_comment = guestComments::all();
 
@@ -395,5 +396,32 @@ class AdminDashboard extends Controller
     public function listUserView(){
         $user = HostelUser::all();
         return view('admin.listUser')->with('users', $user);
+    }
+
+    public function addUserView(){
+        return view('admin.addUser');
+    }
+
+    public function addUser(Request $request){
+        HostelUser::create([
+            'username' => 'manager',
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_type' => 2,  // 1 for admin
+            'fname' => $request->first_name,
+            'lname' => $request->last_name,
+            'mobile_number' => 'N/A',
+        ]);
+
+        return redirect()->route('userList');
+    }
+
+    public function deleteUser(Request $request){
+        $crId = $request->uId;
+        $crData = HostelUser::find($crId);
+        if($crData){
+            $crData->delete();
+            return redirect()->back();
+        }
     }
 }
